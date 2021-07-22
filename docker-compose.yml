@@ -1,0 +1,28 @@
+version: '3'
+services:
+  backend:
+    build: ./
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0.25
+    restart: always
+    environment:
+      MYSQL_DATABASE: enghelp
+      MYSQL_USER: enghelp
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123
+    volumes:
+    -  dbdata:/var/lib/mysql
+    ports:
+    - 33066:3306
+    command: --default_authentication_plugin=mysql_native_password
+
+
+
+volumes:
+  dbdata:
